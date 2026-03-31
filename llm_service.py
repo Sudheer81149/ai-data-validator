@@ -3,7 +3,8 @@ import os
 import json
 
 client = OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY"),
+    #api_key=os.getenv("OPENAI_API_KEY")
+    api_key="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",
     base_url="https://openrouter.ai/api/v1"   # important for your model
 )
 
