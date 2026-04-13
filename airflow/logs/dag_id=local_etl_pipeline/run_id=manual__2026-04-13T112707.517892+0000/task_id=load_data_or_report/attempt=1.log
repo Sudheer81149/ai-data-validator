@@ -1,0 +1,104 @@
+{"timestamp":"2026-04-13T11:28:22.517055Z","level":"info","event":"DAG bundles loaded: dags-folder","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager","filename":"manager.py","lineno":209}
+{"timestamp":"2026-04-13T11:28:22.525359Z","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/local_etl_dag.py","logger":"airflow.dag_processing.dagbag.BundleDagBag","filename":"dagbag.py","lineno":469}
+{"timestamp":"2026-04-13T11:28:23.145433Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.146261Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.146619Z","level":"info","event":"ETL PIPELINE FINAL REPORT","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.147490Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.147839Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.148121Z","level":"info","event":"Data Summary:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.148372Z","level":"info","event":"  Total Records: 11","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.148585Z","level":"info","event":"  Valid: 7","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.148795Z","level":"info","event":"  Invalid: 4","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.149067Z","level":"info","event":"  Quality Score: 92/100","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.149423Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.149742Z","level":"info","event":"✓ 7 records are ready to load","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.150137Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.150501Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.150840Z","level":"info","event":"LLM ANALYSIS SUMMARY & TRANSFORMATION CODE","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.151178Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.151478Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.151904Z","level":"info","event":"Issues Found:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.152274Z","level":"info","event":"The data contains two main problem patterns: (1) invalid date values that do not conform to either yyyy/mm/dd or dd/mm/yyyy formats, and (2) missing name information where the 'name', 'first_name', and 'last_name' fields are all null/empty, preventing the creation of a valid full_name. These issues affect 4 records (2 critical name‑missing, 1 high‑severity date format).","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.152655Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.153014Z","level":"info","event":"────────────────────────────────────────────────────────────────────────────────","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.153373Z","level":"info","event":"TOP 2 SUGGESTED TRANSFORMATIONS:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.153726Z","level":"info","event":"────────────────────────────────────────────────────────────────────────────────","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.154179Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.154642Z","level":"info","event":"[1] INVALID_DATE_FORMAT","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.155061Z","level":"info","event":"Problem: Date values are not in a recognizable format (e.g., 'invalid-date'), causing downstream processing failures.","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.155378Z","level":"info","event":"Solution: The function attempts to parse the input using several expected formats. If successful, it rewrites the date in the desired dd/mm/yyyy format. If parsing fails, the original value is retained (so the record is not dropped) and can be flagged for manual review, preventing pipeline crashes while preserving data integrity.","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.155622Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.155843Z","level":"info","event":"[2] MISSING_NAME","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.156042Z","level":"info","event":"Problem: The 'name', 'first_name', and 'last_name' fields are all null/empty, making it impossible to construct a full_name.","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.156238Z","level":"info","event":"Solution: The helper checks both first_name and last_name for meaningful content. If both are missing/null, it returns None (or NaN after conversion), allowing downstream steps to either skip the record or flag it for manual review. When at least one part is present, it constructs a usable full_name, satisfying the name_composition rule.","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.156439Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.156684Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.156994Z","level":"info","event":"TRANSFORMATION CODE (2 blocks)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.157207Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.157416Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.157618Z","level":"info","event":"################################################################################","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.157817Z","level":"info","event":"# CODE BLOCK 1","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.158011Z","level":"info","event":"################################################################################","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.158206Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.158402Z","level":"info","event":"import pandas as pd","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.158596Z","level":"info","event":"from datetime import datetime","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.158825Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.159172Z","level":"info","event":"# Assuming df is your DataFrame","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.159469Z","level":"info","event":"# ----- Date conversion -----","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.159690Z","level":"info","event":"def _convert_date(val):","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.159933Z","level":"info","event":"    if isinstance(val, str):","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.160155Z","level":"info","event":"        val = val.strip()","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.160354Z","level":"info","event":"        if not val or val.lower() in ('null', 'none', 'nan'):","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.160548Z","level":"info","event":"            return val","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.160741Z","level":"info","event":"        for fmt in ('%Y/%m/%d', '%d/%m/%Y', '%Y-%m-%d', '%d-%m-%Y'):","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.160995Z","level":"info","event":"            try:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.161193Z","level":"info","event":"                parsed = datetime.strptime(val, fmt)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.161388Z","level":"info","event":"                return parsed.strftime('%d/%m/%Y')","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.161582Z","level":"info","event":"            except ValueError:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.161774Z","level":"info","event":"                continue","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.161980Z","level":"info","event":"        return val  # unchanged if unparseable","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.162183Z","level":"info","event":"    return val","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.162382Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.162578Z","level":"info","event":"df['date'] = df['date'].apply(_convert_date)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.162771Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.163014Z","level":"info","event":"# ----- Name composition -----","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.163307Z","level":"info","event":"def _build_full_name(row):","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.163564Z","level":"info","event":"    first = str(row.get('first_name', '')).strip()","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.163773Z","level":"info","event":"    last  = str(row.get('last_name', '')).strip()","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.163974Z","level":"info","event":"    if first.lower() in ('null', 'none', 'nan', '') and last.lower() in ('null', 'none', 'nan', ''):","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.164173Z","level":"info","event":"        return None","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.164444Z","level":"info","event":"    return f'{first} {last}'.strip()","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.164695Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.164980Z","level":"info","event":"df['full_name'] = df.apply(_build_full_name, axis=1)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.165189Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.165391Z","level":"info","event":"# Optional: flag records that still need review","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.165591Z","level":"info","event":"df['date_issue_flag'] = df['date'].apply(lambda x: x if isinstance(x, str) and not any(c.isdigit() for c in x) else None)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.165791Z","level":"info","event":"df['name_issue_flag'] = df['full_name'].isnull()","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.165989Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.166187Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.166386Z","level":"info","event":"################################################################################","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.166583Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.166779Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.166976Z","level":"info","event":"################################################################################","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.167175Z","level":"info","event":"# CODE BLOCK 2","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.167580Z","level":"info","event":"################################################################################","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.167912Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.168132Z","level":"info","event":"# If you prefer to drop records that cannot be resolved instead of flagging:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.168340Z","level":"info","event":"# df = df[df['full_name'].notnull()].copy()","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.168549Z","level":"info","event":"# df = df[~df['date'].str.contains('invalid-date', na=False)].copy()","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.168753Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.168955Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.169157Z","level":"info","event":"################################################################################","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.169359Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.169567Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.169770Z","level":"info","event":"────────────────────────────────────────────────────────────────────────────────","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.169981Z","level":"info","event":"NEXT STEPS:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.170186Z","level":"info","event":"────────────────────────────────────────────────────────────────────────────────","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.170721Z","level":"info","event":"1. 1. Integrate the provided functions into your existing ETL script (e.g., within the transformation stage).","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.170998Z","level":"info","event":"2. 2. Run the script on a subset of the data to verify that date values are now in dd/mm/yyyy format and that full_name is populated where possible.","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.171244Z","level":"info","event":"3. 3. Examine the flag columns (`date_issue_flag`, `name_issue_flag`) to identify records that still require manual review or alternative handling.","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.171494Z","level":"info","event":"4. 4. If business policy dictates dropping unresolved records, uncomment the filtering lines in the second code block and re‑run the pipeline.","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.171761Z","level":"info","event":"5. 5. Add unit tests for `_convert_date` and `_build_full_name` to ensure future data changes do not reintroduce these issues.","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.172006Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.172216Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:28:23.147325Z","level":"info","event":"Done. Returned value was: None","logger":"airflow.task.operators.airflow.providers.standard.operators.python.PythonOperator","filename":"python.py","lineno":229}

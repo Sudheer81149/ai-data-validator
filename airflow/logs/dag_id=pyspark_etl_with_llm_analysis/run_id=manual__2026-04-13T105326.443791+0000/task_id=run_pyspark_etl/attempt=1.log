@@ -1,0 +1,37 @@
+{"timestamp":"2026-04-13T10:53:32.183410Z","level":"info","event":"DAG bundles loaded: dags-folder","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager","filename":"manager.py","lineno":209}
+{"timestamp":"2026-04-13T10:53:32.193682Z","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/pyspark_etl_dag.py","logger":"airflow.dag_processing.dagbag.BundleDagBag","filename":"dagbag.py","lineno":469}
+{"timestamp":"2026-04-13T10:53:33.064819Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.065929Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.066654Z","level":"info","event":"STARTING SPARK-LIKE ETL PIPELINE","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.067347Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.067915Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.068416Z","level":"info","event":"📥 STAGE 1: Reading JSON from /opt/airflow/data_folder/sample_data.json","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.120812Z","level":"info","event":"   ✓ Read 10 records","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.121725Z","level":"info","event":"   ✓ Columns: id, name, email, amount, date, description","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.122492Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.123215Z","level":"info","event":"✓ STAGE 2: Validating data","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.126488Z","level":"info","event":"   ⚠️  Column 'name': 1 nulls (10.0%)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.127136Z","level":"info","event":"   ⚠️  Column 'email': 2 nulls (20.0%)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.127868Z","level":"info","event":"   ⚠️  Column 'amount': 1 nulls (10.0%)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.128555Z","level":"info","event":"   ⚠️  Column 'description': 1 nulls (10.0%)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.129229Z","level":"info","event":"   ⚠️  Amount column: 1 negative values","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.130632Z","level":"info","event":"   ✓ Data validation complete - 6 issues found","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.131446Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.132201Z","level":"info","event":"✓ STAGE 3: Filtering and separating records","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.141052Z","level":"info","event":"   ✓ Valid records: 6","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.141617Z","level":"info","event":"   ✓ Invalid records: 4","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.142304Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.142595Z","level":"info","event":"✓ STAGE 4: Storing Parquet file","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.305863Z","level":"info","event":"   ✓ Parquet file written to /opt/airflow/data_folder/output_parquet","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.306689Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.307245Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.307767Z","level":"info","event":"ETL PIPELINE COMPLETED","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.308229Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.369341Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.369894Z","level":"info","event":"📊 ETL EXECUTION SUMMARY","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.370594Z","level":"info","event":"   Status: SUCCESS","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.371032Z","level":"info","event":"   Valid Records: 6","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.371453Z","level":"info","event":"   Invalid Records: 4","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.371867Z","level":"info","event":"   Issues Found: 6","logger":"task.stdout"}
+{"timestamp":"2026-04-13T10:53:33.370394Z","level":"info","event":"Done. Returned value was: {'status': 'SUCCESS', 'statistics': {'input_records': 10, 'valid_records': 6, 'invalid_records': 4, 'stage_results': {'read': {'status': 'SUCCESS', 'records': 10, 'columns': ['id', 'name', 'email', 'amount', 'date', 'description']}, 'validate': {'status': 'COMPLETE', 'validation_issues': 6}, 'filter': {'status': 'COMPLETE', 'valid_records': 6, 'invalid_records': 4}, 'store': {'status': 'SUCCESS', 'output_path': '/opt/airflow/data_folder/output_parquet'}}}, 'issues': [{'stage': 'VALIDATE', 'column': 'name', 'type': 'NULL_VALUES', 'count': 1, 'percentage': np.float64(10.0), 'severity': 'MEDIUM'}, {'stage': 'VALIDATE', 'column': 'email', 'type': 'NULL_VALUES', 'count': 2, 'percentage': np.float64(20.0), 'severity': 'HIGH'}, {'stage': 'VALIDATE', 'column': 'amount', 'type': 'NULL_VALUES', 'count': 1, 'percentage': np.float64(10.0), 'severity': 'MEDIUM'}, {'stage': 'VALIDATE', 'column': 'description', 'type': 'NULL_VALUES', 'count': 1, 'percentage': np.float64(10.0), 'severity': 'MEDIUM'}, {'stage': 'VALIDATE', 'column': 'amount', 'type': 'NEGATIVE_VALUES', 'count': 1, 'severity': 'MEDIUM'}, {'stage': 'VALIDATE', 'column': 'description', 'type': 'EMPTY_STRING', 'count': 1, 'severity': 'LOW'}], 'output_path': '/opt/airflow/data_folder/output_parquet', 'valid_records': 6, 'invalid_records': 4}","logger":"airflow.task.operators.airflow.providers.standard.operators.python.PythonOperator","filename":"python.py","lineno":229}
+{"timestamp":"2026-04-13T10:53:33.371035Z","level":"info","event":"Pushing xcom","ti":"RuntimeTaskInstance(id=UUID('019d8679-8e91-7979-948d-a92cc5c917f9'), task_id='run_pyspark_etl', dag_id='pyspark_etl_with_llm_analysis', run_id='manual__2026-04-13T10:53:26.443791+00:00', try_number=1, dag_version_id=UUID('019d8678-ab5c-7959-93cb-9eed42c656d3'), map_index=-1, hostname='aa77711e486e', context_carrier={'traceparent': '00-91179817992bd59bea0d91769845c51e-8e934699ffe90e07-01'}, task=<Task(PythonOperator): run_pyspark_etl>, bundle_instance=LocalDagBundle(name=dags-folder), max_tries=1, start_date=datetime.datetime(2026, 4, 13, 10, 53, 27, 767495, tzinfo=datetime.timezone.utc), end_date=None, state=<TaskInstanceState.RUNNING: 'running'>, is_mapped=False, rendered_map_index=None, sentry_integration='')","logger":"task","filename":"task_runner.py","lineno":1724}

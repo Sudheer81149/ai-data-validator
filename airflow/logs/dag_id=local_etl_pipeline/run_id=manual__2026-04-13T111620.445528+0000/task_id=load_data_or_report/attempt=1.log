@@ -1,0 +1,17 @@
+{"timestamp":"2026-04-13T11:17:38.044322Z","level":"info","event":"DAG bundles loaded: dags-folder","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager","filename":"manager.py","lineno":209}
+{"timestamp":"2026-04-13T11:17:38.048609Z","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/local_etl_dag.py","logger":"airflow.dag_processing.dagbag.BundleDagBag","filename":"dagbag.py","lineno":469}
+{"timestamp":"2026-04-13T11:17:38.528420Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:17:38.529273Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:17:38.529724Z","level":"info","event":"ETL PIPELINE FINAL REPORT","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:17:38.529994Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:17:38.530363Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:17:38.530655Z","level":"info","event":"Data Summary:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:17:38.530984Z","level":"info","event":"  Total Records: 11","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:17:38.531195Z","level":"info","event":"  Valid: 7","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:17:38.531560Z","level":"info","event":"  Invalid: 4","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:17:38.531825Z","level":"info","event":"  Quality Score: 92/100","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:17:38.532086Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:17:38.532514Z","level":"info","event":"✓ 7 records are ready to load","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:17:38.532973Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:17:38.533227Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T11:17:38.528443Z","level":"info","event":"Done. Returned value was: None","logger":"airflow.task.operators.airflow.providers.standard.operators.python.PythonOperator","filename":"python.py","lineno":229}

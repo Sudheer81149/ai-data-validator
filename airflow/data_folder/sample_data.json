@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "amount": 1500.50,
+    "date": "2026-01-15",
+    "description": "Monthly subscription payment"
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "amount": 2500.00,
+    "date": "2026-01-16",
+    "description": "Premium service upgrade"
+  },
+  {
+    "id": 3,
+    "name": "Bob Johnson",
+    "email": "bob@example.com",
+    "amount": -500.00,
+    "date": "2026-01-17",
+    "description": "Refund issued"
+  },
+  {
+    "id": 4,
+    "name": "Alice Brown",
+    "email": "alice@example.com",
+    "amount": 3000.25,
+    "date": "2026-01-18",
+    "description": null
+  },
+  {
+    "id": 5,
+    "name": "Charlie Wilson",
+    "email": null,
+    "amount": 1800.00,
+    "date": "invalid-date",
+    "description": "Training session"
+  },
+  {
+    "id": 6,
+    "name": "Diana Prince",
+    "email": "diana@example.com",
+    "amount": 4200.75,
+    "date": "2026-01-19",
+    "description": "Enterprise license"
+  },
+  {
+    "id": 7,
+    "name": null,
+    "email": "frank@example.com",
+    "amount": 900.00,
+    "date": "2026-01-20",
+    "description": "Support ticket resolution"
+  },
+  {
+    "id": 8,
+    "name": "Eve Davis",
+    "email": "eve@example.com",
+    "amount": 5000.00,
+    "date": "2026-01-21",
+    "description": "Annual contract"
+  },
+  {
+    "id": 9,
+    "name": "George Miller",
+    "email": null,
+    "amount": null,
+    "date": "2026-01-22",
+    "description": "Pending review"
+  },
+  {
+    "id": 10,
+    "name": "Helen Taylor",
+    "email": "helen@example.com",
+    "amount": 1200.00,
+    "date": "2026-01-23",
+    "description": "Monthly renewal"
+  }
+]

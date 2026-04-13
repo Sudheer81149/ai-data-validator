@@ -1,0 +1,161 @@
+{"timestamp":"2026-04-13T12:25:39.111586Z","level":"info","event":"DAG bundles loaded: dags-folder","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager","filename":"manager.py","lineno":209}
+{"timestamp":"2026-04-13T12:25:39.115612Z","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/local_etl_dag.py","logger":"airflow.dag_processing.dagbag.BundleDagBag","filename":"dagbag.py","lineno":469}
+{"timestamp":"2026-04-13T12:27:06.360141Z","level":"info","event":"Runtime issue analysis failed: Unterminated string starting at: line 24 column 5 (char 3523)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.439231Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.439924Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.440450Z","level":"info","event":"RUNTIME DATA ISSUES & LLM TRANSFORMATION SUGGESTIONS","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.440984Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.441375Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.441666Z","level":"info","event":"Total Issues Found: 3","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.441960Z","level":"info","event":"Issue Patterns: {'invalid_date_format': 1, 'missing_name': 1}","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.442383Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.442700Z","level":"info","event":"LLM Analysis Summary:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.443207Z","level":"info","event":"Found 3 data quality issues. Suggesting transformations to fix.","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.443859Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.444377Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.444715Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.445117Z","level":"info","event":"SUGGESTED TRANSFORMATIONS","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.445872Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.446871Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.447926Z","level":"info","event":"[TRANSFORMATION 1] NULL_FIRST_NAME","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.448690Z","level":"info","event":"────────────────────────────────────────────────────────────────────────────────","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.449994Z","level":"info","event":"Problem: first_name is NULL or empty - cannot create full_name by combining first_name + last_name","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.450768Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.451364Z","level":"info","event":"Transformation Rule Applied: name_composition: first_name + last_name → full_name","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.452041Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.452570Z","level":"info","event":"How It Fixes:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.453203Z","level":"info","event":"Handles null/empty first_name by checking both fields and creating full_name only when possible. Skips records where both are null.","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.453633Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.454133Z","level":"info","event":"Example:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.454510Z","level":"info","event":"Input: {first_name: NULL, last_name: 'Doe'} → Output: {full_name: 'Doe'}; Input: {first_name: 'John', last_name: NULL} → Output: {full_name: 'John'}","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.454783Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.455060Z","level":"info","event":"Suggested Code:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.455444Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.455809Z","level":"info","event":"# Handle null/empty first_name for name composition","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.456180Z","level":"info","event":"def create_full_name(row):","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.456552Z","level":"info","event":"    first = str(row.get('first_name', '')).strip() if pd.notna(row.get('first_name')) else ''","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.457009Z","level":"info","event":"    last = str(row.get('last_name', '')).strip() if pd.notna(row.get('last_name')) else ''","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.457385Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.457707Z","level":"info","event":"    if first and last:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.458313Z","level":"info","event":"        return f\"{first} {last}\"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.458792Z","level":"info","event":"    elif first or last:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.459357Z","level":"info","event":"        return first or last","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.459751Z","level":"info","event":"    else:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.460106Z","level":"info","event":"        return None  # Skip if both are null","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.460670Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.461317Z","level":"info","event":"df['full_name'] = df.apply(create_full_name, axis=1)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.461701Z","level":"info","event":"df = df[df['full_name'].notna()]  # Skip records with null full_name","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.462152Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.462987Z","level":"info","event":"────────────────────────────────────────────────────────────────────────────────","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.463552Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.463944Z","level":"info","event":"[TRANSFORMATION 2] DATE_FORMAT_CONVERSION","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.464761Z","level":"info","event":"────────────────────────────────────────────────────────────────────────────────","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.465625Z","level":"info","event":"Problem: DOB format is yyyy/mm/dd but needs to be converted to dd/mm/yyyy","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.466148Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.466830Z","level":"info","event":"Transformation Rule Applied: date_conversion: yyyy/mm/dd → dd/mm/yyyy","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.467691Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.468065Z","level":"info","event":"How It Fixes:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.468547Z","level":"info","event":"Parses dates in yyyy/mm/dd format and converts to dd/mm/yyyy. Skips records with invalid or null dates.","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.469042Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.469636Z","level":"info","event":"Example:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.470557Z","level":"info","event":"Input: '2001/01/29' → Output: '29/01/2001'; Input: NULL → Skipped","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.472181Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.472714Z","level":"info","event":"Suggested Code:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.473133Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.473654Z","level":"info","event":"from datetime import datetime","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.474027Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.474424Z","level":"info","event":"# Convert DOB from yyyy/mm/dd to dd/mm/yyyy","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.474997Z","level":"info","event":"def convert_dob_format(dob_value):","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.475446Z","level":"info","event":"    if pd.isna(dob_value) or dob_value == '':","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.475829Z","level":"info","event":"        return None  # Skip null values","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.476165Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.476438Z","level":"info","event":"    try:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.476810Z","level":"info","event":"        # Try parsing as yyyy/mm/dd","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.477206Z","level":"info","event":"        parsed_date = datetime.strptime(str(dob_value).strip(), '%Y/%m/%d')","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.477547Z","level":"info","event":"        # Return as dd/mm/yyyy","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.478059Z","level":"info","event":"        return parsed_date.strftime('%d/%m/%Y')","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.478694Z","level":"info","event":"    except ValueError:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.479007Z","level":"info","event":"        return None  # Skip if format doesn't match","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.479447Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.479850Z","level":"info","event":"df['dob'] = df['dob'].apply(convert_dob_format)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.480239Z","level":"info","event":"df = df[df['dob'].notna()]  # Skip records with invalid DOB","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.480625Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.481292Z","level":"info","event":"────────────────────────────────────────────────────────────────────────────────","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.481795Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.482216Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.482767Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.483299Z","level":"info","event":"READY-TO-USE CODE BLOCKS (COMPLETE IMPLEMENTATIONS)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.483715Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.484053Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.484444Z","level":"info","event":"Total code blocks: 1","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.485070Z","level":"info","event":"✓ Full transformation code is provided and ready to implement","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.485799Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.486427Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.487424Z","level":"info","event":"################################################################################","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.488208Z","level":"info","event":"# CODE BLOCK 1 - COMPLETE IMPLEMENTATION","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.488846Z","level":"info","event":"################################################################################","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.489416Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.489892Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.490526Z","level":"info","event":"# COMPLETE TRANSFORMATION BLOCK for handling data issues","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.491380Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.491945Z","level":"info","event":"import pandas as pd","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.492453Z","level":"info","event":"from datetime import datetime","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.492835Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.493374Z","level":"info","event":"def transform_json_data(input_data):","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.493840Z","level":"info","event":"    '''Transform JSON data: combine names, convert dates, handle nulls'''","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.494326Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.494837Z","level":"info","event":"    df = pd.DataFrame(input_data) if isinstance(input_data, list) else pd.DataFrame([input_data])","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.495313Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.495711Z","level":"info","event":"    # STEP 1: Create full_name from first_name + last_name","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.496137Z","level":"info","event":"    def create_full_name(row):","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.496570Z","level":"info","event":"        first = str(row.get('first_name', '')).strip() if pd.notna(row.get('first_name')) else ''","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.497020Z","level":"info","event":"        last = str(row.get('last_name', '')).strip() if pd.notna(row.get('last_name')) else ''","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.497392Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.497840Z","level":"info","event":"        if first and last:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.498379Z","level":"info","event":"            return f\"{first} {last}\"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.498791Z","level":"info","event":"        elif first or last:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.499206Z","level":"info","event":"            return first or last","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.500208Z","level":"info","event":"        else:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.500774Z","level":"info","event":"            return None","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.501300Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.501604Z","level":"info","event":"    df['full_name'] = df.apply(create_full_name, axis=1)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.502465Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.502822Z","level":"info","event":"    # STEP 2: Convert DOB from yyyy/mm/dd to dd/mm/yyyy","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.503152Z","level":"info","event":"    def convert_dob_format(dob_value):","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.503480Z","level":"info","event":"        if pd.isna(dob_value) or dob_value == '':","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.503793Z","level":"info","event":"            return None","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.504448Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.504951Z","level":"info","event":"        try:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.505753Z","level":"info","event":"            parsed_date = datetime.strptime(str(dob_value).strip(), '%Y/%m/%d')","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.506175Z","level":"info","event":"            return parsed_date.strftime('%d/%m/%Y')","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.506728Z","level":"info","event":"        except ValueError:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.507205Z","level":"info","event":"            return None","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.507730Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.508366Z","level":"info","event":"    df['dob'] = df['dob'].apply(convert_dob_format)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.509075Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.509505Z","level":"info","event":"    # STEP 3: Skip records with null critical fields","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.510091Z","level":"info","event":"    critical_fields = ['full_name', 'dob']","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.510590Z","level":"info","event":"    for field in critical_fields:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.511095Z","level":"info","event":"        df = df[df[field].notna()]","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.511598Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.512056Z","level":"info","event":"    # STEP 4: Remove duplicates","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.512495Z","level":"info","event":"    df = df.drop_duplicates()","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.512842Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.513373Z","level":"info","event":"    # STEP 5: Convert back to JSON/dict format","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.513823Z","level":"info","event":"    result_json = df.to_dict(orient='records')","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.514155Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.514450Z","level":"info","event":"    return result_json","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.514800Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.515115Z","level":"info","event":"# Usage in Airflow task:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.515374Z","level":"info","event":"# transformed_data = transform_json_data(input_json_data)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.515626Z","level":"info","event":"# Store in JSON file (not Parquet)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.515870Z","level":"info","event":"# with open('output.json', 'w') as f:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.516119Z","level":"info","event":"#     json.dump(transformed_data, f, indent=2)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.516361Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.516603Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.516852Z","level":"info","event":"################################################################################","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.517097Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.517345Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.517551Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:06.462560Z","level":"info","event":"Done. Returned value was: {'status': 'success', 'issues_summary': 'Found 3 data quality issues. Suggesting transformations to fix.', 'suggested_transformations': [{'issue_type': 'null_first_name', 'problem': 'first_name is NULL or empty - cannot create full_name by combining first_name + last_name', 'transformation_rule_applied': 'name_composition: first_name + last_name → full_name', 'suggested_code': '\\n# Handle null/empty first_name for name composition\\ndef create_full_name(row):\\n    first = str(row.get(\\'first_name\\', \\'\\')).strip() if pd.notna(row.get(\\'first_name\\')) else \\'\\'\\n    last = str(row.get(\\'last_name\\', \\'\\')).strip() if pd.notna(row.get(\\'last_name\\')) else \\'\\'\\n    \\n    if first and last:\\n        return f\"{first} {last}\"\\n    elif first or last:\\n        return first or last\\n    else:\\n        return None  # Skip if both are null\\n\\ndf[\\'full_name\\'] = df.apply(create_full_name, axis=1)\\ndf = df[df[\\'full_name\\'].notna()]  # Skip records with null full_name\\n                    ', 'how_it_fixes': 'Handles null/empty first_name by checking both fields and creating full_name only when possible. Skips records where both are null.', 'example': \"Input: {first_name: NULL, last_name: 'Doe'} → Output: {full_name: 'Doe'}; Input: {first_name: 'John', last_name: NULL} → Output: {full_name: 'John'}\"}, {'issue_type': 'date_format_conversion', 'problem': 'DOB format is yyyy/mm/dd but needs to be converted to dd/mm/yyyy', 'transformation_rule_applied': 'date_conversion: yyyy/mm/dd → dd/mm/yyyy', 'suggested_code': \"\\nfrom datetime import datetime\\n\\n# Convert DOB from yyyy/mm/dd to dd/mm/yyyy\\ndef convert_dob_format(dob_value):\\n    if pd.isna(dob_value) or dob_value == '':\\n        return None  # Skip null values\\n    \\n    try:\\n        # Try parsing as yyyy/mm/dd\\n        parsed_date = datetime.strptime(str(dob_value).strip(), '%Y/%m/%d')\\n        # Return as dd/mm/yyyy\\n        return parsed_date.strftime('%d/%m/%Y')\\n    except ValueError:\\n        return None  # Skip if format doesn't match\\n\\ndf['dob'] = df['dob'].apply(convert_dob_format)\\ndf = df[df['dob'].notna()]  # Skip records with invalid DOB\\n                    \", 'how_it_fixes': 'Parses dates in yyyy/mm/dd format and converts to dd/mm/yyyy. Skips records with invalid or null dates.', 'example': \"Input: '2001/01/29' → Output: '29/01/2001'; Input: NULL → Skipped\"}, {'issue_type': 'null_column_skip', 'problem': 'Null/empty values in critical columns should be skipped during transformation', 'transformation_rule_applied': 'null_handling: skip null values', 'suggested_code': '\\n# Skip records where critical fields are null\\ncritical_fields = [\\'full_name\\', \\'dob\\', \\'email\\']\\n\\nfor field in critical_fields:\\n    df = df[df[field].notna()]  # Keep only non-null rows\\n    df = df[df[field] != \\'\\']    # Keep only non-empty rows\\n\\n# Also remove completely duplicate rows\\ndf = df.drop_duplicates()\\n\\nprint(f\"Rows after null/empty removal: {len(df)}\")\\n                    ', 'how_it_fixes': 'Removes records with null or empty values in critical fields. Prevents invalid data from being stored.', 'example': 'Input: 10 records with 3 having null email → Output: 7 valid records'}], 'code_suggestions': ['\\n# COMPLETE TRANSFORMATION BLOCK for handling data issues\\n\\nimport pandas as pd\\nfrom datetime import datetime\\n\\ndef transform_json_data(input_data):\\n    \\'\\'\\'Transform JSON data: combine names, convert dates, handle nulls\\'\\'\\'\\n    \\n    df = pd.DataFrame(input_data) if isinstance(input_data, list) else pd.DataFrame([input_data])\\n    \\n    # STEP 1: Create full_name from first_name + last_name\\n    def create_full_name(row):\\n        first = str(row.get(\\'first_name\\', \\'\\')).strip() if pd.notna(row.get(\\'first_name\\')) else \\'\\'\\n        last = str(row.get(\\'last_name\\', \\'\\')).strip() if pd.notna(row.get(\\'last_name\\')) else \\'\\'\\n        \\n        if first and last:\\n            return f\"{first} {last}\"\\n        elif first or last:\\n            return first or last\\n        else:\\n            return None\\n    \\n    df[\\'full_name\\'] = df.apply(create_full_name, axis=1)\\n    \\n    # STEP 2: Convert DOB from yyyy/mm/dd to dd/mm/yyyy\\n    def convert_dob_format(dob_value):\\n        if pd.isna(dob_value) or dob_value == \\'\\':\\n            return None\\n        \\n        try:\\n            parsed_date = datetime.strptime(str(dob_value).strip(), \\'%Y/%m/%d\\')\\n            return parsed_date.strftime(\\'%d/%m/%Y\\')\\n        except ValueError:\\n            return None\\n    \\n    df[\\'dob\\'] = df[\\'dob\\'].apply(convert_dob_format)\\n    \\n    # STEP 3: Skip records with null critical fields\\n    critical_fields = [\\'full_name\\', \\'dob\\']\\n    for field in critical_fields:\\n        df = df[df[field].notna()]\\n    \\n    # STEP 4: Remove duplicates\\n    df = df.drop_duplicates()\\n    \\n    # STEP 5: Convert back to JSON/dict format\\n    result_json = df.to_dict(orient=\\'records\\')\\n    \\n    return result_json\\n\\n# Usage in Airflow task:\\n# transformed_data = transform_json_data(input_json_data)\\n# Store in JSON file (not Parquet)\\n# with open(\\'output.json\\', \\'w\\') as f:\\n#     json.dump(transformed_data, f, indent=2)\\n                '], 'next_steps': ['1. Add the transformation functions to your ETL pipeline (task_transform_data.py)', '2. Call transform_json_data() on the input JSON data', '3. Store the transformed data in JSON format (not Parquet initially)', '4. Log how many records were skipped due to null values', '5. Return the transformed JSON for downstream processing']}","logger":"airflow.task.operators.airflow.providers.standard.operators.python.PythonOperator","filename":"python.py","lineno":229}
+{"timestamp":"2026-04-13T12:27:06.482342Z","level":"info","event":"Pushing xcom","ti":"RuntimeTaskInstance(id=UUID('019d86cd-e66e-7d74-8f7c-b5f07872a5ec'), task_id='analyze_issues', dag_id='local_etl_pipeline', run_id='manual__2026-04-13T12:25:33.990807+00:00', try_number=1, dag_version_id=UUID('019d8678-ab6d-79da-b839-993a89ef7dd0'), map_index=-1, hostname='aa77711e486e', context_carrier={'traceparent': '00-20789c9e14354f02cd0fdb0a431b6345-90b8a2cd4fbd7ccd-01'}, task=<Task(PythonOperator): analyze_issues>, bundle_instance=LocalDagBundle(name=dags-folder), max_tries=1, start_date=datetime.datetime(2026, 4, 13, 12, 25, 39, 54325, tzinfo=datetime.timezone.utc), end_date=None, state=<TaskInstanceState.RUNNING: 'running'>, is_mapped=False, rendered_map_index=None, sentry_integration='')","logger":"task","filename":"task_runner.py","lineno":1724}

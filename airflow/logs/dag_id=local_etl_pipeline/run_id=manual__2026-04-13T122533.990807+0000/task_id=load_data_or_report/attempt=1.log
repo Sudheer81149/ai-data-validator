@@ -1,0 +1,114 @@
+{"timestamp":"2026-04-13T12:27:10.550530Z","level":"info","event":"DAG bundles loaded: dags-folder","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager","filename":"manager.py","lineno":209}
+{"timestamp":"2026-04-13T12:27:10.558209Z","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/local_etl_dag.py","logger":"airflow.dag_processing.dagbag.BundleDagBag","filename":"dagbag.py","lineno":469}
+{"timestamp":"2026-04-13T12:27:11.253894Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.254929Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.255516Z","level":"info","event":"ETL PIPELINE FINAL REPORT","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.256189Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.256665Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.257078Z","level":"info","event":"Data Summary:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.257531Z","level":"info","event":"  Total Records: 10","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.257968Z","level":"info","event":"  Valid: 7","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.258618Z","level":"info","event":"  Invalid: 3","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.259366Z","level":"info","event":"  Quality Score: 94/100","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.259886Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.260317Z","level":"info","event":"✓ 7 records are ready to load","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.260748Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.261066Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.261428Z","level":"info","event":"LLM ANALYSIS SUMMARY & TRANSFORMATION CODE","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.261758Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.262044Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.262323Z","level":"info","event":"Issues Found:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.262603Z","level":"info","event":"Found 3 data quality issues. Suggesting transformations to fix.","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.262881Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.263472Z","level":"info","event":"────────────────────────────────────────────────────────────────────────────────","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.264060Z","level":"info","event":"TOP 2 SUGGESTED TRANSFORMATIONS:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.264825Z","level":"info","event":"────────────────────────────────────────────────────────────────────────────────","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.265536Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.266091Z","level":"info","event":"[1] NULL_FIRST_NAME","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.266620Z","level":"info","event":"Problem: first_name is NULL or empty - cannot create full_name by combining first_name + last_name","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.266925Z","level":"info","event":"Solution: Handles null/empty first_name by checking both fields and creating full_name only when possible. Skips records where both are null.","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.267501Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.268461Z","level":"info","event":"[2] DATE_FORMAT_CONVERSION","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.268885Z","level":"info","event":"Problem: DOB format is yyyy/mm/dd but needs to be converted to dd/mm/yyyy","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.269378Z","level":"info","event":"Solution: Parses dates in yyyy/mm/dd format and converts to dd/mm/yyyy. Skips records with invalid or null dates.","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.270045Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.270543Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.270904Z","level":"info","event":"TRANSFORMATION CODE (1 blocks)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.271280Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.271557Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.271847Z","level":"info","event":"################################################################################","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.272152Z","level":"info","event":"# CODE BLOCK 1","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.272480Z","level":"info","event":"################################################################################","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.272780Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.273114Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.273434Z","level":"info","event":"# COMPLETE TRANSFORMATION BLOCK for handling data issues","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.273792Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.274304Z","level":"info","event":"import pandas as pd","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.275022Z","level":"info","event":"from datetime import datetime","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.275771Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.276383Z","level":"info","event":"def transform_json_data(input_data):","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.276920Z","level":"info","event":"    '''Transform JSON data: combine names, convert dates, handle nulls'''","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.277368Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.277780Z","level":"info","event":"    df = pd.DataFrame(input_data) if isinstance(input_data, list) else pd.DataFrame([input_data])","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.278302Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.278677Z","level":"info","event":"    # STEP 1: Create full_name from first_name + last_name","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.279329Z","level":"info","event":"    def create_full_name(row):","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.279779Z","level":"info","event":"        first = str(row.get('first_name', '')).strip() if pd.notna(row.get('first_name')) else ''","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.280549Z","level":"info","event":"        last = str(row.get('last_name', '')).strip() if pd.notna(row.get('last_name')) else ''","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.281352Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.282010Z","level":"info","event":"        if first and last:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.283042Z","level":"info","event":"            return f\"{first} {last}\"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.283787Z","level":"info","event":"        elif first or last:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.284639Z","level":"info","event":"            return first or last","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.285109Z","level":"info","event":"        else:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.285453Z","level":"info","event":"            return None","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.285832Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.286101Z","level":"info","event":"    df['full_name'] = df.apply(create_full_name, axis=1)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.286563Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.286933Z","level":"info","event":"    # STEP 2: Convert DOB from yyyy/mm/dd to dd/mm/yyyy","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.287358Z","level":"info","event":"    def convert_dob_format(dob_value):","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.287746Z","level":"info","event":"        if pd.isna(dob_value) or dob_value == '':","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.288583Z","level":"info","event":"            return None","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.289288Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.289794Z","level":"info","event":"        try:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.290239Z","level":"info","event":"            parsed_date = datetime.strptime(str(dob_value).strip(), '%Y/%m/%d')","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.290732Z","level":"info","event":"            return parsed_date.strftime('%d/%m/%Y')","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.291280Z","level":"info","event":"        except ValueError:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.291705Z","level":"info","event":"            return None","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.292069Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.292462Z","level":"info","event":"    df['dob'] = df['dob'].apply(convert_dob_format)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.292837Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.293313Z","level":"info","event":"    # STEP 3: Skip records with null critical fields","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.293828Z","level":"info","event":"    critical_fields = ['full_name', 'dob']","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.294255Z","level":"info","event":"    for field in critical_fields:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.294959Z","level":"info","event":"        df = df[df[field].notna()]","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.295480Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.296532Z","level":"info","event":"    # STEP 4: Remove duplicates","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.297106Z","level":"info","event":"    df = df.drop_duplicates()","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.297557Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.298567Z","level":"info","event":"    # STEP 5: Convert back to JSON/dict format","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.299299Z","level":"info","event":"    result_json = df.to_dict(orient='records')","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.300403Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.300990Z","level":"info","event":"    return result_json","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.301363Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.301771Z","level":"info","event":"# Usage in Airflow task:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.302118Z","level":"info","event":"# transformed_data = transform_json_data(input_json_data)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.302462Z","level":"info","event":"# Store in JSON file (not Parquet)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.302726Z","level":"info","event":"# with open('output.json', 'w') as f:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.302979Z","level":"info","event":"#     json.dump(transformed_data, f, indent=2)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.303213Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.303477Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.303724Z","level":"info","event":"################################################################################","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.303938Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.304136Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.304415Z","level":"info","event":"────────────────────────────────────────────────────────────────────────────────","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.304680Z","level":"info","event":"NEXT STEPS:","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.255178Z","level":"info","event":"Done. Returned value was: None","logger":"airflow.task.operators.airflow.providers.standard.operators.python.PythonOperator","filename":"python.py","lineno":229}
+{"timestamp":"2026-04-13T12:27:11.340294Z","level":"info","event":"────────────────────────────────────────────────────────────────────────────────","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.341304Z","level":"info","event":"1. 1. Add the transformation functions to your ETL pipeline (task_transform_data.py)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.341826Z","level":"info","event":"2. 2. Call transform_json_data() on the input JSON data","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.342325Z","level":"info","event":"3. 3. Store the transformed data in JSON format (not Parquet initially)","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.342786Z","level":"info","event":"4. 4. Log how many records were skipped due to null values","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.343215Z","level":"info","event":"5. 5. Return the transformed JSON for downstream processing","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.343675Z","level":"info","event":"================================================================================","logger":"task.stdout"}
+{"timestamp":"2026-04-13T12:27:11.344287Z","level":"info","event":"","logger":"task.stdout"}
